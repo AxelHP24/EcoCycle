@@ -180,7 +180,6 @@ C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\ag1ysul56b-caoa9yso7c.gz
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\kpp4yw1z05-kdgqnhztwv.gz
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\gvo8gkv5t7-cekyg9rg6z.gz
-C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\zkruyli1q4-b9sayid5wm.gz
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\4ha78h2rbu-61n19gt1b8.gz
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\w7ltm0umt1-7kawibxkp2.gz
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\bm9n4ob8ud-xtxxf3hu2r.gz
@@ -297,3 +296,4 @@ C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\bin\Debug\net9.
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\EcoCycleMVC.csproj.AssemblyReference.cache
+C:\Users\axelu\OneDrive\Escritorio\EcoCycle\EcoCycle\EcoCycleMVC\obj\Debug\net9.0\compressed\zkruyli1q4-wvj8nd23x3.gz

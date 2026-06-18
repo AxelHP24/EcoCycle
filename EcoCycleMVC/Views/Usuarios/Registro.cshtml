@@ -1,0 +1,73 @@
+@model EcoCycleMVC.Models.Usuario
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h2 class="text-success text-center">
+
+Crear Cuenta
+
+</h2>
+
+<form method="post">
+
+<label>Nombre</label>
+
+<input asp-for="Nombre"
+class="form-control"/>
+
+<br />
+
+<label>Correo</label>
+
+<input asp-for="Correo"
+class="form-control"/>
+
+<br />
+
+<label>Contraseña</label>
+
+<input asp-for="PasswordHash"
+type="password"
+class="form-control"/>
+
+<br />
+
+<label>Telefono</label>
+
+<input asp-for="Telefono"
+class="form-control"/>
+
+<br />
+
+<label>Direccion</label>
+
+<input asp-for="Direccion"
+class="form-control"/>
+
+<br />
+
+<button class="btn btn-success w-100">
+
+Registrarme
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>

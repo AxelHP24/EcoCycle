@@ -1,31 +1,55 @@
-html {
-  font-size: 14px;
+body{
+
+font-family:Arial, Helvetica, sans-serif;
+
+background:#f4f7f6;
+
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.hero{
+
+padding:90px 0;
+
+background:linear-gradient(120deg,#d4fc79,#96e6a1);
+
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.hero h1{
+
+color:#14532d;
+
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.card{
+
+border:none;
+
+border-radius:20px;
+
+transition:.4s;
+
 }
 
-body {
-  margin-bottom: 60px;
+.card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0px 20px 30px rgba(0,0,0,.2);
+
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.btn-success{
+
+padding:12px 35px;
+
+font-size:20px;
+
+border-radius:40px;
+
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+footer{
+
+margin-top:0;
+
 }

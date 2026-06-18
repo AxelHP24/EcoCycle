@@ -1,0 +1,74 @@
+@{
+    ViewData["Title"]="Login";
+}
+
+<div class="container mt-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-5">
+
+<div class="card shadow-lg">
+
+<div class="card-body">
+
+<h2 class="text-center text-success">
+
+♻ EcoCycle
+
+</h2>
+
+<hr />
+
+@if(ViewBag.Error!=null)
+{
+<div class="alert alert-danger">
+
+@ViewBag.Error
+
+</div>
+}
+
+<form method="post">
+
+<label>Correo</label>
+
+<input class="form-control"
+name="correo"/>
+
+<br />
+
+<label>Contraseña</label>
+
+<input
+type="password"
+class="form-control"
+name="password"/>
+
+<br />
+
+<button class="btn btn-success w-100">
+
+Entrar
+
+</button>
+
+</form>
+
+<hr />
+
+<a asp-action="Registro">
+
+Crear cuenta
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
