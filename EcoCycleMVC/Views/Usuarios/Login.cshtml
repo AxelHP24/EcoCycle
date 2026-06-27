@@ -1,74 +1,62 @@
+@model EcoCycleMVC.Models.LoginViewModel
+
 @{
-    ViewData["Title"]="Login";
+    ViewData["Title"] = "Login";
+}
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["Mensaje"]
+    </div>
 }
 
 <div class="container mt-5">
 
-<div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-<div class="col-md-5">
+        <div class="col-md-5">
 
-<div class="card shadow-lg">
+            <div class="card shadow-lg">
 
-<div class="card-body">
+                <div class="card-header bg-success text-white text-center">
 
-<h2 class="text-center text-success">
+                    <h2>Iniciar Sesión</h2>
 
-♻ EcoCycle
+                </div>
 
-</h2>
+                <div class="card-body">
 
-<hr />
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.Error
+                        </div>
+                    }
 
-@if(ViewBag.Error!=null)
-{
-<div class="alert alert-danger">
+                    <form asp-action="Login" method="post">
 
-@ViewBag.Error
+                        <input asp-for="Correo"
+                               class="form-control mb-3"
+                               placeholder="Correo" />
 
-</div>
-}
+                        <input asp-for="Password"
+                               type="password"
+                               class="form-control mb-3"
+                               placeholder="Contraseña" />
 
-<form method="post">
+                        <button class="btn btn-success w-100">
+                            Entrar
+                        </button>
 
-<label>Correo</label>
+                    </form>
 
-<input class="form-control"
-name="correo"/>
+                </div>
 
-<br />
+            </div>
 
-<label>Contraseña</label>
+        </div>
 
-<input
-type="password"
-class="form-control"
-name="password"/>
-
-<br />
-
-<button class="btn btn-success w-100">
-
-Entrar
-
-</button>
-
-</form>
-
-<hr />
-
-<a asp-action="Registro">
-
-Crear cuenta
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </div>

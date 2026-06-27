@@ -3,17 +3,19 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Agregar servicios MVC
 builder.Services.AddControllersWithViews();
 
-// Registrar el DbContext
+// Agregar Session
+builder.Services.AddSession();
+
+// Registrar DbContext
 builder.Services.AddDbContext<EcoCycleContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("EcoCycleConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -23,6 +25,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+// Activar Session
+app.UseSession();
 
 app.UseAuthorization();
 

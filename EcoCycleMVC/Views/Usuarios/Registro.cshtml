@@ -1,73 +1,105 @@
 @model EcoCycleMVC.Models.Usuario
 
+@{
+    ViewData["Title"] = "Registro";
+}
+
 <div class="container mt-5">
 
-<div class="row justify-content-center">
+    <div class="row justify-content-center">
 
-<div class="col-md-6">
+        <div class="col-md-7">
 
-<div class="card shadow">
+            <div class="card shadow-lg border-0 rounded-4">
 
-<div class="card-body">
+                <div class="card-header bg-success text-white text-center">
 
-<h2 class="text-success text-center">
+                    <h2>🌎 Crear Cuenta</h2>
 
-Crear Cuenta
+                </div>
 
-</h2>
+                <div class="card-body p-4">
 
-<form method="post">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.Error
+                        </div>
+                    }
 
-<label>Nombre</label>
+                    <form asp-action="Registro" method="post">
 
-<input asp-for="Nombre"
-class="form-control"/>
+                        <div class="mb-3">
 
-<br />
+                            <label asp-for="Nombre" class="form-label">
+                                Nombre completo
+                            </label>
 
-<label>Correo</label>
+                            <input asp-for="Nombre" class="form-control"/>
 
-<input asp-for="Correo"
-class="form-control"/>
+                        </div>
 
-<br />
+                        <div class="mb-3">
 
-<label>Contraseña</label>
+                            <label asp-for="Correo" class="form-label">
+                                Correo
+                            </label>
 
-<input asp-for="PasswordHash"
-type="password"
-class="form-control"/>
+                            <input asp-for="Correo"
+                                   type="email"
+                                   class="form-control"/>
 
-<br />
+                        </div>
 
-<label>Telefono</label>
+                        <div class="mb-3">
 
-<input asp-for="Telefono"
-class="form-control"/>
+                            <label asp-for="PasswordHash" class="form-label">
+                                Contraseña
+                            </label>
 
-<br />
+                            <input asp-for="PasswordHash"
+                                   type="password"
+                                   class="form-control"/>
 
-<label>Direccion</label>
+                        </div>
 
-<input asp-for="Direccion"
-class="form-control"/>
+                        <div class="mb-3">
 
-<br />
+                            <label asp-for="Telefono" class="form-label">
+                                Teléfono
+                            </label>
 
-<button class="btn btn-success w-100">
+                            <input asp-for="Telefono"
+                                   class="form-control"/>
 
-Registrarme
+                        </div>
 
-</button>
+                        <div class="mb-3">
 
-</form>
+                            <label asp-for="Direccion" class="form-label">
+                                Dirección
+                            </label>
 
-</div>
+                            <textarea asp-for="Direccion"
+                                      class="form-control"></textarea>
 
-</div>
+                        </div>
 
-</div>
+                        <button type="submit"
+                                class="btn btn-success w-100">
 
-</div>
+                            Registrarme
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>

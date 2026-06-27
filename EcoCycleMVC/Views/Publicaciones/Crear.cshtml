@@ -1,0 +1,92 @@
+@model EcoCycleMVC.Models.NuevaPublicacionViewModel
+
+@{
+    ViewData["Title"] = "Nueva Publicación";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-success text-white text-center">
+
+                    <h2>♻ Publicar Material</h2>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Crear" method="post">
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Material
+                            </label>
+
+                            <select asp-for="MaterialId"
+                                    asp-items="Model.Materiales"
+                                    class="form-select">
+
+                                <option value="">Seleccione un material</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Cantidad (Kg)
+                            </label>
+
+                            <input asp-for="CantidadKg"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Ubicación
+                            </label>
+
+                            <input asp-for="Ubicacion"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-bold">
+                                Descripción
+                            </label>
+
+                            <textarea asp-for="Descripcion"
+                                      rows="4"
+                                      class="form-control">
+                            </textarea>
+
+                        </div>
+
+                        <button class="btn btn-success btn-lg w-100">
+
+                            Publicar Material
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
