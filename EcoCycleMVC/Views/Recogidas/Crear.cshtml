@@ -1,0 +1,55 @@
+@model EcoCycleMVC.Models.RecogidaViewModel
+
+@{
+    ViewData["Title"] = "Solicitar Recogida";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white text-center">
+            🚚 Solicitar Recogida
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Crear" method="post">
+
+                <!-- CENTROS -->
+                <div class="mb-3">
+
+                    <label>Centro de reciclaje</label>
+
+                    <select asp-for="CentroId"
+                            asp-items="Model.Centros"
+                            class="form-control">
+
+                        <option value="">Seleccione un centro</option>
+
+                    </select>
+
+                </div>
+
+                <!-- DIRECCIÓN (CORREGIDO) -->
+                <div class="mb-3">
+
+                    <label>Dirección</label>
+
+                    <input asp-for="Direccion"
+                           class="form-control"
+                           placeholder="Ingrese su dirección" />
+
+                </div>
+
+                <button class="btn btn-success w-100">
+                    Solicitar
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

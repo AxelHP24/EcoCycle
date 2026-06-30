@@ -1,0 +1,34 @@
+@model List<dynamic>
+
+@{
+    ViewData["Title"] = "Centros de Reciclaje";
+}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">📍 Centros de Reciclaje</h2>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-3">
+
+                <div class="card shadow">
+
+                    <div class="card-body text-center">
+
+                        <h5>📍 Ubicación</h5>
+
+                        <p>@item.Ubicacion</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

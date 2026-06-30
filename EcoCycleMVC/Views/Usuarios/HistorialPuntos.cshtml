@@ -1,0 +1,100 @@
+@model IEnumerable<EcoCycleMVC.Models.MovimientosPunto>
+
+@{
+    ViewData["Title"] = "Historial de Puntos";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg">
+
+        <div class="card-header bg-success text-white">
+
+            <h2>⭐ Historial de Puntos</h2>
+
+        </div>
+
+        <div class="card-body">
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+
+                    Aún no tienes movimientos de puntos.
+
+                </div>
+            }
+            else
+            {
+
+                <table class="table table-hover">
+
+                    <thead class="table-success">
+
+                        <tr>
+
+                            <th>Fecha</th>
+
+                            <th>Tipo</th>
+
+                            <th>Puntos</th>
+
+                            <th>Descripción</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+
+                                <td>
+
+                                    @item.FechaMovimiento?.ToString("dd/MM/yyyy")
+
+                                </td>
+
+                                <td>
+
+                                    @item.TipoMovimiento
+
+                                </td>
+
+                                <td class="text-success fw-bold">
+
+                                    +@item.Puntos
+
+                                </td>
+
+                                <td>
+
+                                    @item.Descripcion
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            }
+
+            <a asp-action="Dashboard"
+               class="btn btn-secondary">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

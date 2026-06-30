@@ -1,0 +1,120 @@
+@model EcoCycleMVC.Models.NuevaPublicacionViewModel
+
+@{
+    ViewData["Title"] = "Editar Publicación";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-warning text-dark text-center p-4">
+
+                    <h2>✏ Editar Publicación</h2>
+
+                    <p class="mb-0">
+
+                        Modifica la información de tu material reciclable.
+
+                    </p>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form asp-action="Editar"
+                          asp-route-id="@ViewBag.PublicacionId"
+                          method="post">
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                Material
+
+                            </label>
+
+                            <select asp-for="MaterialId"
+                                    asp-items="Model.Materiales"
+                                    class="form-select">
+
+                            </select>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                Cantidad (Kg)
+
+                            </label>
+
+                            <input asp-for="CantidadKg"
+                                   class="form-control">
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                Ubicación
+
+                            </label>
+
+                            <input asp-for="Ubicacion"
+                                   class="form-control">
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-bold">
+
+                                Descripción
+
+                            </label>
+
+                            <textarea asp-for="Descripcion"
+                                      rows="5"
+                                      class="form-control"></textarea>
+
+                        </div>
+
+                        <button class="btn btn-warning">
+
+                            💾 Guardar Cambios
+
+                        </button>
+
+                        <a asp-action="MisPublicaciones"
+                           class="btn btn-secondary">
+
+                            Cancelar
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -6,9 +6,16 @@
 
 <div class="container mt-5">
 
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success text-center">
+            @TempData["Mensaje"]
+        </div>
+    }
+
     <div class="row">
 
-        <!-- PERFIL -->
+        <!-- ================= PERFIL ================= -->
         <div class="col-lg-4 mb-4">
 
             <div class="card shadow-lg border-0 rounded-4">
@@ -16,10 +23,10 @@
                 <div class="card-body text-center">
 
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                         class="rounded-circle mb-3"
+                         class="rounded-circle shadow mb-3"
                          width="150" />
 
-                    <h3>@Model.Nombre</h3>
+                    <h3 class="fw-bold">@Model.Nombre</h3>
 
                     <p class="text-muted">@Model.Correo</p>
 
@@ -27,26 +34,32 @@
 
                     <p>
                         <strong>📱 Teléfono</strong><br />
-                        @(string.IsNullOrEmpty(Model.Telefono) ? "No registrado" : Model.Telefono)
+                        @(string.IsNullOrWhiteSpace(Model.Telefono) ? "No registrado" : Model.Telefono)
                     </p>
 
                     <p>
-                        <strong>🏠 Dirección</strong><br />
-                        @(string.IsNullOrEmpty(Model.Direccion) ? "No registrada" : Model.Direccion)
+                        <strong>📍 Dirección</strong><br />
+                        @(string.IsNullOrWhiteSpace(Model.Direccion) ? "No registrada" : Model.Direccion)
                     </p>
 
-                    <h4 class="text-success mt-3">
-                        ⭐ @Model.Puntos Puntos
-                    </h4>
+                    <div class="alert alert-success">
+                        <h3 class="mb-0">⭐ @Model.Puntos Puntos</h3>
+                    </div>
 
-                    <a asp-action="EditarPerfil"
-                       class="btn btn-success w-100 mt-3">
-                        Editar Perfil
+                    <a asp-controller="Usuarios"
+                       asp-action="EditarPerfil"
+                       class="btn btn-success w-100 mb-2">
+
+                        <i class="bi bi-pencil-square"></i> Editar Perfil
+
                     </a>
 
-                    <a asp-action="Logout"
-                       class="btn btn-danger w-100 mt-2">
-                        Cerrar Sesión
+                    <a asp-controller="Usuarios"
+                       asp-action="Logout"
+                       class="btn btn-danger w-100">
+
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+
                     </a>
 
                 </div>
@@ -55,15 +68,14 @@
 
         </div>
 
-        <!-- OPCIONES -->
+        <!-- ================= OPCIONES ================= -->
         <div class="col-lg-8">
 
-            <h2 class="mb-4">
-                ¡Bienvenido, @Model.Nombre!
-            </h2>
+            <h2 class="mb-4">¡Bienvenido @Model.Nombre! 👋</h2>
 
             <div class="row">
 
+                <!-- PUBLICAR -->
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -71,20 +83,13 @@
                         <div class="card-body text-center">
 
                             <h1>♻</h1>
-
                             <h4>Publicar Material</h4>
+                            <p>Registra materiales reciclables.</p>
 
-                            <p>
-                                Registra materiales reciclables para obtener puntos.
-                            </p>
-
-                            <!-- BOTÓN AGREGADO -->
                             <a asp-controller="Publicaciones"
                                asp-action="Crear"
-                               class="btn btn-success mt-3">
-
+                               class="btn btn-success">
                                 Publicar
-
                             </a>
 
                         </div>
@@ -93,19 +98,22 @@
 
                 </div>
 
+                <!-- PUBLICACIONES -->
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
 
                         <div class="card-body text-center">
 
-                            <h1>🏆</h1>
+                            <h1>📦</h1>
+                            <h4>Mis Publicaciones</h4>
+                            <p>Gestiona tus publicaciones.</p>
 
-                            <h4>Mis Recompensas</h4>
-
-                            <p>
-                                Consulta tus recompensas disponibles.
-                            </p>
+                            <a asp-controller="Publicaciones"
+                               asp-action="MisPublicaciones"
+                               class="btn btn-primary">
+                                Ver
+                            </a>
 
                         </div>
 
@@ -113,6 +121,7 @@
 
                 </div>
 
+                <!-- RECOGIDAS -->
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -120,12 +129,14 @@
                         <div class="card-body text-center">
 
                             <h1>🚚</h1>
+                            <h4>Recogidas</h4>
+                            <p>Solicita recolección de materiales.</p>
 
-                            <h4>Solicitar Recogida</h4>
-
-                            <p>
-                                Programa una recolección a domicilio.
-                            </p>
+                            <a asp-controller="Recogidas"
+                               asp-action="Crear"
+                               class="btn btn-warning">
+                                Solicitar
+                            </a>
 
                         </div>
 
@@ -133,6 +144,7 @@
 
                 </div>
 
+                <!-- CENTROS -->
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -140,12 +152,83 @@
                         <div class="card-body text-center">
 
                             <h1>📍</h1>
-
                             <h4>Centros de Reciclaje</h4>
+                            <p>Consulta centros disponibles.</p>
 
-                            <p>
-                                Encuentra el centro más cercano.
-                            </p>
+                            <a asp-controller="Centros"
+                               asp-action="Index"
+                               class="btn btn-info text-white">
+                                Ver Centros
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RECOMPENSAS -->
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow h-100">
+
+                        <div class="card-body text-center">
+
+                            <h1>🏆</h1>
+                            <h4>Recompensas</h4>
+                            <p>Canjea tus puntos.</p>
+
+                            <a asp-controller="Recompensas"
+                               asp-action="Index"
+                               class="btn btn-success">
+                                Ver
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- HISTORIAL -->
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow h-100">
+
+                        <div class="card-body text-center">
+
+                            <h1>⭐</h1>
+                            <h4>Historial de Puntos</h4>
+                            <p>Revisa tus puntos obtenidos.</p>
+
+                            <a asp-controller="Usuarios"
+                               asp-action="HistorialPuntos"
+                               class="btn btn-secondary">
+                                Ver
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- NOTIFICACIONES -->
+                <div class="col-md-6 mb-4">
+
+                    <div class="card shadow h-100">
+
+                        <div class="card-body text-center">
+
+                            <h1>🔔</h1>
+                            <h4>Notificaciones</h4>
+                            <p>Mensajes del sistema EcoCycle.</p>
+
+                            <a asp-controller="Notificaciones"
+                               asp-action="Index"
+                               class="btn btn-dark">
+                                Abrir
+                            </a>
 
                         </div>
 

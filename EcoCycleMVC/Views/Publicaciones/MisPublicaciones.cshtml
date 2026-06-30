@@ -1,0 +1,136 @@
+@model IEnumerable<EcoCycleMVC.Models.Publicacione>
+
+@{
+    ViewData["Title"] = "Mis Publicaciones";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+
+        ♻ Mis Publicaciones
+
+    </h2>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+
+            @TempData["Mensaje"]
+
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">
+
+            Aún no tienes publicaciones.
+
+        </div>
+
+        <a asp-action="Crear"
+           class="btn btn-success">
+
+            Publicar Material
+
+        </a>
+    }
+    else
+    {
+
+        <table class="table table-hover shadow">
+
+            <thead class="table-success">
+
+                <tr>
+
+                    <th>Material</th>
+
+                    <th>Kg</th>
+
+                    <th>Ubicación</th>
+
+                    <th>Estado</th>
+
+                    <th>Fecha</th>
+
+                    <th width="220">Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+
+                        <td>
+
+                            @item.Material.NombreMaterial
+
+                        </td>
+
+                        <td>
+
+                            @item.CantidadKg
+
+                        </td>
+
+                        <td>
+
+                            @item.Ubicacion
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-success">
+
+                                @item.Estado
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            @item.FechaPublicacion?.ToString("dd/MM/yyyy")
+
+                        </td>
+
+                        <td>
+
+                            <a asp-action="Editar"
+                               asp-route-id="@item.PublicacionId"
+                               class="btn btn-warning btn-sm">
+
+                                ✏ Editar
+
+                            </a>
+
+                            <a asp-action="Eliminar"
+                               asp-route-id="@item.PublicacionId"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Deseas eliminar esta publicación?');">
+
+                                🗑 Eliminar
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    }
+
+</div>

@@ -23,6 +23,8 @@ public partial class CentrosRecoleccion
 
     public string? Telefono { get; set; }
 
+public string Ubicacion { get; set; }
+
     public virtual ICollection<Entrega> Entregas { get; set; } = new List<Entrega>();
 
     public virtual ICollection<RecogidasDomicilio> RecogidasDomicilios { get; set; } = new List<RecogidasDomicilio>();

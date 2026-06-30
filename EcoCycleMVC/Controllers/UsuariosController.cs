@@ -104,6 +104,62 @@ namespace EcoCycleMVC.Controllers
         }
 
         //=========================================
+        // EDITAR PERFIL (GET)
+        //=========================================
+
+        [HttpGet]
+        public IActionResult EditarPerfil()
+        {
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+
+            if (usuarioId == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.UsuarioId == usuarioId);
+
+            if (usuario == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(usuario);
+        }
+
+        //=========================================
+        // EDITAR PERFIL (POST)
+        //=========================================
+
+        [HttpPost]
+        public IActionResult EditarPerfil(Usuario modelo)
+        {
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+
+            if (usuarioId == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.UsuarioId == usuarioId);
+
+            if (usuario == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            usuario.Nombre = modelo.Nombre;
+            usuario.Telefono = modelo.Telefono;
+            usuario.Direccion = modelo.Direccion;
+
+            _context.SaveChanges();
+
+            TempData["Mensaje"] = "Perfil actualizado correctamente.";
+
+            return RedirectToAction("Dashboard");
+        }
+
+        //=========================================
         // LOGOUT
         //=========================================
 
