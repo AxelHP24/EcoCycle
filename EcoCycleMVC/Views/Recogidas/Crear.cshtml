@@ -1,4 +1,4 @@
-@model EcoCycleMVC.Models.RecogidaViewModel
+@model EcoCycleMVC.Models.NuevaRecogidaViewModel
 
 @{
     ViewData["Title"] = "Solicitar Recogida";
@@ -6,50 +6,176 @@
 
 <div class="container mt-5">
 
-    <div class="card shadow">
+    <div class="row justify-content-center">
 
-        <div class="card-header bg-success text-white text-center">
-            🚚 Solicitar Recogida
-        </div>
+        <div class="col-lg-8">
 
-        <div class="card-body">
+            <div class="card shadow-lg border-0 rounded-4">
 
-            <form asp-action="Crear" method="post">
+                <div class="card-header bg-success text-white text-center">
+                    <h2>🚚 Solicitar Recogida a Domicilio</h2>
+                </div>
 
-                <!-- CENTROS -->
-                <div class="mb-3">
+                <div class="card-body p-4">
 
-                    <label>Centro de reciclaje</label>
+                    @if (TempData["Mensaje"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Mensaje"]
+                        </div>
+                    }
 
-                    <select asp-for="CentroId"
-                            asp-items="Model.Centros"
-                            class="form-control">
+                    <form asp-controller="Recogidas"
+                          asp-action="Crear"
+                          method="post">
 
-                        <option value="">Seleccione un centro</option>
+                        @Html.AntiForgeryToken()
 
-                    </select>
+                        <div asp-validation-summary="All"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="CentroId" class="form-label"></label>
+
+                            <select asp-for="CentroId"
+                                    asp-items="Model.Centros"
+                                    class="form-select">
+
+                                <option value="">Seleccione un centro</option>
+
+                            </select>
+
+                            <span asp-validation-for="CentroId"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="FechaProgramada"
+                                   class="form-label"></label>
+
+                            <input asp-for="FechaProgramada"
+                                   type="datetime-local"
+                                   class="form-control" />
+
+                            <span asp-validation-for="FechaProgramada"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label asp-for="Direccion"
+                                   class="form-label"></label>
+
+                            <textarea asp-for="Direccion"
+                                      id="direccion"
+                                      class="form-control"
+                                      rows="3"
+                                      readonly></textarea>
+
+                            <span asp-validation-for="Direccion"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <h5 class="text-success">
+                                📍 Tu ubicación
+                            </h5>
+
+                            <iframe id="mapa"
+                                    width="100%"
+                                    height="350"
+                                    style="border:0;border-radius:10px;"
+                                    loading="lazy">
+                            </iframe>
+
+                        </div>
+
+                        <button type="button"
+                                class="btn btn-primary mb-3"
+                                onclick="obtenerUbicacion()">
+
+                            📍 Obtener mi ubicación
+
+                        </button>
+
+                        <br />
+
+                        <button type="submit"
+                                class="btn btn-success">
+
+                            🚚 Solicitar Recogida
+
+                        </button>
+
+                        <a asp-controller="Usuarios"
+                           asp-action="Dashboard"
+                           class="btn btn-secondary">
+
+                            Cancelar
+
+                        </a>
+
+                    </form>
 
                 </div>
 
-                <!-- DIRECCIÓN (CORREGIDO) -->
-                <div class="mb-3">
-
-                    <label>Dirección</label>
-
-                    <input asp-for="Direccion"
-                           class="form-control"
-                           placeholder="Ingrese su dirección" />
-
-                </div>
-
-                <button class="btn btn-success w-100">
-                    Solicitar
-                </button>
-
-            </form>
+            </div>
 
         </div>
 
     </div>
 
 </div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+<script>
+
+function obtenerUbicacion(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(function(pos){
+
+            let lat = pos.coords.latitude;
+            let lng = pos.coords.longitude;
+
+            document.getElementById("direccion").value =
+                lat + ", " + lng;
+
+            document.getElementById("mapa").src =
+                "https://maps.google.com/maps?q="
+                + lat + "," + lng +
+                "&z=16&output=embed";
+
+        },
+        function(){
+
+            alert("No fue posible obtener la ubicación.");
+
+        });
+
+    }else{
+
+        alert("Tu navegador no soporta Geolocalización.");
+
+    }
+
+}
+
+window.onload = obtenerUbicacion;
+
+</script>
+
+}

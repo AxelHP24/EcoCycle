@@ -6,26 +6,35 @@
 
 <div class="container mt-5">
 
-    <h2 class="mb-4">🚚 Mis Recogidas</h2>
+    <h2 class="mb-4">
+
+        🚚 Mis Solicitudes de Recogida
+
+    </h2>
 
     @if (TempData["Mensaje"] != null)
     {
         <div class="alert alert-success">
+
             @TempData["Mensaje"]
+
         </div>
     }
 
-    <table class="table table-bordered">
+    <table class="table table-striped table-hover shadow">
 
         <thead class="table-success">
 
             <tr>
+
                 <th>Centro</th>
+
                 <th>Dirección</th>
-                <th>Fecha Solicitud</th>
+
                 <th>Fecha Programada</th>
+
                 <th>Estado</th>
-                <th></th>
+
             </tr>
 
         </thead>
@@ -34,22 +43,66 @@
 
             @foreach (var item in Model)
             {
+
                 <tr>
-                    <td>@item.Centro.NombreCentro</td>
-                    <td>@item.Direccion</td>
-                    <td>@item.FechaSolicitud</td>
-                    <td>@item.FechaProgramada</td>
-                    <td>@item.Estado</td>
+
                     <td>
-                        <a asp-action="Cancelar"
-                           asp-route-id="@item.RecogidaId"
-                           class="btn btn-danger btn-sm">
 
-                            Cancelar
+                        @item.Centro.NombreCentro
 
-                        </a>
                     </td>
+
+                    <td>
+
+                        @item.Direccion
+
+                    </td>
+
+                    <td>
+
+                        @item.FechaProgramada?.ToString("dd/MM/yyyy HH:mm")
+
+                    </td>
+
+                    <td>
+
+                        @if (item.Estado == "Pendiente")
+                        {
+                            <span class="badge bg-warning text-dark">
+
+                                Pendiente
+
+                            </span>
+                        }
+                        else if (item.Estado == "Aceptada")
+                        {
+                            <span class="badge bg-primary">
+
+                                Aceptada
+
+                            </span>
+                        }
+                        else if (item.Estado == "En camino")
+                        {
+                            <span class="badge bg-info">
+
+                                En camino
+
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">
+
+                                Finalizada
+
+                            </span>
+                        }
+
+                    </td>
+
                 </tr>
+
             }
 
         </tbody>

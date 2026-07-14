@@ -1,0 +1,50 @@
+@model IEnumerable<EcoCycleMVC.Models.Publicacione>
+
+@{
+    ViewData["Title"] = "Publicaciones";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+
+        📦 Publicaciones
+
+    </h2>
+
+    <table class="table table-hover shadow">
+
+        <thead class="table-warning">
+
+            <tr>
+
+                <th>Usuario</th>
+                <th>Material</th>
+                <th>Cantidad</th>
+                <th>Estado</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        @foreach(var item in Model)
+        {
+
+            <tr>
+
+                <td>@item.Usuario.Nombre</td>
+                <td>@item.Material.NombreMaterial</td>
+                <td>@item.CantidadKg Kg</td>
+                <td>@item.Estado</td>
+
+            </tr>
+
+        }
+
+        </tbody>
+
+    </table>
+
+</div>

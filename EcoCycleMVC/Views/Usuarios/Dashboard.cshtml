@@ -8,14 +8,16 @@
 
     @if (TempData["Mensaje"] != null)
     {
-        <div class="alert alert-success text-center">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     }
 
     <div class="row">
 
-        <!-- ================= PERFIL ================= -->
+        <!--================ PERFIL =================-->
+
         <div class="col-lg-4 mb-4">
 
             <div class="card shadow-lg border-0 rounded-4">
@@ -23,8 +25,8 @@
                 <div class="card-body text-center">
 
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                         class="rounded-circle shadow mb-3"
-                         width="150" />
+                         width="150"
+                         class="rounded-circle shadow mb-3" />
 
                     <h3 class="fw-bold">@Model.Nombre</h3>
 
@@ -34,23 +36,33 @@
 
                     <p>
                         <strong>📱 Teléfono</strong><br />
-                        @(string.IsNullOrWhiteSpace(Model.Telefono) ? "No registrado" : Model.Telefono)
+                        @(string.IsNullOrWhiteSpace(Model.Telefono)
+                            ? "No registrado"
+                            : Model.Telefono)
                     </p>
 
                     <p>
                         <strong>📍 Dirección</strong><br />
-                        @(string.IsNullOrWhiteSpace(Model.Direccion) ? "No registrada" : Model.Direccion)
+                        @(string.IsNullOrWhiteSpace(Model.Direccion)
+                            ? "No registrada"
+                            : Model.Direccion)
                     </p>
 
                     <div class="alert alert-success">
-                        <h3 class="mb-0">⭐ @Model.Puntos Puntos</h3>
+
+                        <h3 class="mb-0">
+
+                            ⭐ @Model.Puntos Puntos
+
+                        </h3>
+
                     </div>
 
                     <a asp-controller="Usuarios"
                        asp-action="EditarPerfil"
                        class="btn btn-success w-100 mb-2">
 
-                        <i class="bi bi-pencil-square"></i> Editar Perfil
+                        ✏ Editar Perfil
 
                     </a>
 
@@ -58,7 +70,7 @@
                        asp-action="Logout"
                        class="btn btn-danger w-100">
 
-                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                        🚪 Cerrar Sesión
 
                     </a>
 
@@ -68,14 +80,20 @@
 
         </div>
 
-        <!-- ================= OPCIONES ================= -->
+        <!--================ MENÚ =================-->
+
         <div class="col-lg-8">
 
-            <h2 class="mb-4">¡Bienvenido @Model.Nombre! 👋</h2>
+            <h2 class="mb-4">
+
+                ¡Bienvenido @Model.Nombre! 👋
+
+            </h2>
 
             <div class="row">
 
-                <!-- PUBLICAR -->
+                <!-- PUBLICAR MATERIAL -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -83,13 +101,21 @@
                         <div class="card-body text-center">
 
                             <h1>♻</h1>
+
                             <h4>Publicar Material</h4>
-                            <p>Registra materiales reciclables.</p>
+
+                            <p>
+
+                                Registra materiales reciclables para obtener puntos.
+
+                            </p>
 
                             <a asp-controller="Publicaciones"
                                asp-action="Crear"
                                class="btn btn-success">
+
                                 Publicar
+
                             </a>
 
                         </div>
@@ -98,7 +124,8 @@
 
                 </div>
 
-                <!-- PUBLICACIONES -->
+                <!-- MIS PUBLICACIONES -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -106,13 +133,21 @@
                         <div class="card-body text-center">
 
                             <h1>📦</h1>
+
                             <h4>Mis Publicaciones</h4>
-                            <p>Gestiona tus publicaciones.</p>
+
+                            <p>
+
+                                Consulta, edita o elimina tus publicaciones.
+
+                            </p>
 
                             <a asp-controller="Publicaciones"
                                asp-action="MisPublicaciones"
                                class="btn btn-primary">
-                                Ver
+
+                                Ver Publicaciones
+
                             </a>
 
                         </div>
@@ -122,6 +157,7 @@
                 </div>
 
                 <!-- RECOGIDAS -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -129,13 +165,21 @@
                         <div class="card-body text-center">
 
                             <h1>🚚</h1>
-                            <h4>Recogidas</h4>
-                            <p>Solicita recolección de materiales.</p>
+
+                            <h4>Solicitar Recogida</h4>
+
+                            <p>
+
+                                Agenda una recolección a domicilio.
+
+                            </p>
 
                             <a asp-controller="Recogidas"
                                asp-action="Crear"
                                class="btn btn-warning">
+
                                 Solicitar
+
                             </a>
 
                         </div>
@@ -145,6 +189,7 @@
                 </div>
 
                 <!-- CENTROS -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -152,13 +197,21 @@
                         <div class="card-body text-center">
 
                             <h1>📍</h1>
+
                             <h4>Centros de Reciclaje</h4>
-                            <p>Consulta centros disponibles.</p>
+
+                            <p>
+
+                                Consulta los centros registrados.
+
+                            </p>
 
                             <a asp-controller="Centros"
                                asp-action="Index"
                                class="btn btn-info text-white">
+
                                 Ver Centros
+
                             </a>
 
                         </div>
@@ -168,6 +221,7 @@
                 </div>
 
                 <!-- RECOMPENSAS -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -175,13 +229,21 @@
                         <div class="card-body text-center">
 
                             <h1>🏆</h1>
+
                             <h4>Recompensas</h4>
-                            <p>Canjea tus puntos.</p>
+
+                            <p>
+
+                                Canjea tus puntos por premios.
+
+                            </p>
 
                             <a asp-controller="Recompensas"
                                asp-action="Index"
                                class="btn btn-success">
-                                Ver
+
+                                Ver Recompensas
+
                             </a>
 
                         </div>
@@ -191,6 +253,7 @@
                 </div>
 
                 <!-- HISTORIAL -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -198,13 +261,21 @@
                         <div class="card-body text-center">
 
                             <h1>⭐</h1>
+
                             <h4>Historial de Puntos</h4>
-                            <p>Revisa tus puntos obtenidos.</p>
+
+                            <p>
+
+                                Consulta todos los movimientos de puntos de tu cuenta.
+
+                            </p>
 
                             <a asp-controller="Usuarios"
                                asp-action="HistorialPuntos"
                                class="btn btn-secondary">
-                                Ver
+
+                                Ver Historial
+
                             </a>
 
                         </div>
@@ -214,6 +285,7 @@
                 </div>
 
                 <!-- NOTIFICACIONES -->
+
                 <div class="col-md-6 mb-4">
 
                     <div class="card shadow h-100">
@@ -221,13 +293,21 @@
                         <div class="card-body text-center">
 
                             <h1>🔔</h1>
+
                             <h4>Notificaciones</h4>
-                            <p>Mensajes del sistema EcoCycle.</p>
+
+                            <p>
+
+                                Consulta los avisos del sistema EcoCycle.
+
+                            </p>
 
                             <a asp-controller="Notificaciones"
                                asp-action="Index"
                                class="btn btn-dark">
+
                                 Abrir
+
                             </a>
 
                         </div>

@@ -1,0 +1,44 @@
+@model IEnumerable<EcoCycleMVC.Models.Materiale>
+
+@{
+    ViewData["Title"] = "Materiales";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+        ♻ Materiales Reciclables
+    </h2>
+
+    <table class="table table-bordered shadow">
+
+        <thead class="table-success">
+
+            <tr>
+
+                <th>Material</th>
+                <th>Puntos por Kg</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        @foreach(var item in Model)
+        {
+
+            <tr>
+
+                <td>@item.NombreMaterial</td>
+                <td>@item.PuntosPorKg</td>
+
+            </tr>
+
+        }
+
+        </tbody>
+
+    </table>
+
+</div>

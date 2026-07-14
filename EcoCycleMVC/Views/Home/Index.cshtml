@@ -2,263 +2,388 @@
     ViewData["Title"] = "Inicio";
 }
 
+<!-- ===========================
+        MENÚ
+============================ -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow fixed-top">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold fs-3"
+           asp-controller="Home"
+           asp-action="Index">
+            🌎 EcoCycle
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       asp-controller="Home"
+                       asp-action="Index">
+                        <i class="bi bi-house-door-fill"></i>
+                        Inicio
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#nosotros">
+                        Nosotros
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#materiales">
+                        Materiales
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#funciona">
+                        ¿Cómo funciona?
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       asp-controller="Usuarios"
+                       asp-action="Login">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Iniciar Sesión
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <a class="btn btn-warning fw-bold"
+                       asp-controller="Usuarios"
+                       asp-action="Registro">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Registrarse
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ===========================
+        HERO
+============================ -->
+
 <section class="hero">
 
-<div class="container">
+    <div class="container">
 
-<div class="row align-items-center">
+        <div class="row align-items-center">
 
-<div class="col-lg-6">
+            <div class="col-lg-6">
 
-<h1 class="display-3 fw-bold">
+                <h1 class="display-3 fw-bold">
 
-Recicla.
-<br>
+                    Recicla.
+                    <br />
+                    Gana.
+                    <br />
+                    Cuida el planeta.
 
-Gana.
-<br>
+                </h1>
 
-Cuida el planeta.
+                <p class="lead mt-4">
 
-</h1>
+                    EcoCycle conecta a las personas con centros de reciclaje para convertir residuos reciclables en puntos y recompensas.
 
-<p class="lead">
+                </p>
 
-EcoCycle conecta a las personas con centros de reciclaje para convertir residuos en recompensas.
+                <a href="#funciona"
+                   class="btn btn-success btn-lg mt-3">
 
-</p>
+                    Comenzar
 
-<a href="#funciona" class="btn btn-success btn-lg mt-3">
+                </a>
 
-Comenzar
+            </div>
 
-</a>
+            <div class="col-lg-6 text-center">
 
-</div>
+                <img src="~/assets/img/hero-carousel/hero-carousel-1.jpg"
+                     class="img-fluid rounded shadow"
+                     alt="EcoCycle">
 
-<div class="col-lg-6 text-center">
+            </div>
 
-<img src="~/assets/img/hero-carousel/hero-carousel-1.jpg"
-class="img-fluid rounded shadow">
+        </div>
 
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="nosotros" class="py-5">
-
-<div class="container">
-
-<h2 class="text-center mb-5">
-
-¿Qué es EcoCycle?
-
-</h2>
-
-<div class="row">
-
-<div class="col-md-4">
-
-<div class="card shadow p-4">
-
-<h3>🌱</h3>
-
-<h4>Reciclaje</h4>
-
-<p>
-
-Promovemos el reciclaje responsable para disminuir la contaminación.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card shadow p-4">
-
-<h3>🏆</h3>
-
-<h4>Recompensas</h4>
-
-<p>
-
-Obtén puntos por cada entrega de materiales reciclables.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="card shadow p-4">
-
-<h3>🌎</h3>
-
-<h4>Medio Ambiente</h4>
-
-<p>
-
-Cada acción ayuda a construir un planeta más limpio.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<section id="funciona" class="bg-light py-5">
+<!-- ===========================
+        NOSOTROS
+============================ -->
 
-<div class="container">
+<section id="nosotros">
 
-<h2 class="text-center mb-5">
+    <div class="container">
 
-¿Cómo funciona?
+        <h2 class="text-center mb-5">
+            ¿Qué es EcoCycle?
+        </h2>
 
-</h2>
+        <div class="row g-4">
 
-<div class="row text-center">
+            <div class="col-md-4">
 
-<div class="col-md-3">
+                <div class="card shadow p-4 text-center h-100">
 
-<h1>1️⃣</h1>
+                    <h1>🌱</h1>
 
-<h5>Regístrate</h5>
+                    <h4 class="mt-3">
+                        Reciclaje
+                    </h4>
 
-</div>
+                    <p>
 
-<div class="col-md-3">
+                        Promovemos el reciclaje responsable para reducir la contaminación y cuidar nuestro entorno.
 
-<h1>2️⃣</h1>
+                    </p>
 
-<h5>Entrega residuos</h5>
+                </div>
 
-</div>
+            </div>
 
-<div class="col-md-3">
+            <div class="col-md-4">
 
-<h1>3️⃣</h1>
+                <div class="card shadow p-4 text-center h-100">
 
-<h5>Obtén puntos</h5>
+                    <h1>🏆</h1>
 
-</div>
+                    <h4 class="mt-3">
+                        Recompensas
+                    </h4>
 
-<div class="col-md-3">
+                    <p>
 
-<h1>4️⃣</h1>
+                        Acumula puntos cada vez que entregues materiales reciclables y canjéalos por premios.
 
-<h5>Canjea recompensas</h5>
+                    </p>
 
-</div>
+                </div>
 
-</div>
+            </div>
 
-</div>
+            <div class="col-md-4">
+
+                <div class="card shadow p-4 text-center h-100">
+
+                    <h1>🌎</h1>
+
+                    <h4 class="mt-3">
+                        Medio Ambiente
+                    </h4>
+
+                    <p>
+
+                        Cada kilo reciclado ayuda a disminuir los residuos y protege el planeta.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===========================
+        MATERIALES
+============================ -->
+
+<section id="materiales" class="bg-light">
+
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+
+            Materiales aceptados
+
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-3">
+
+                <div class="card text-center shadow p-4 h-100">
+
+                    <h1>♻️</h1>
+
+                    <h5>Plástico</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card text-center shadow p-4 h-100">
+
+                    <h1>📰</h1>
+
+                    <h5>Papel</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card text-center shadow p-4 h-100">
+
+                    <h1>🍾</h1>
+
+                    <h5>Vidrio</h5>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="card text-center shadow p-4 h-100">
+
+                    <h1>🥫</h1>
+
+                    <h5>Metal</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<section id="materiales" class="py-5">
+<!-- ===========================
+        FUNCIONA
+============================ -->
 
-<div class="container">
+<section id="funciona">
 
-<h2 class="text-center mb-5">
+    <div class="container">
 
-Materiales aceptados
+        <h2 class="text-center mb-5">
 
-</h2>
+            ¿Cómo funciona?
 
-<div class="row">
+        </h2>
 
-<div class="col-md-3">
+        <div class="row text-center g-4">
 
-<div class="card shadow text-center p-4">
+            <div class="col-md-3">
 
-♻️
+                <h1>1️⃣</h1>
 
-<h5>Plástico</h5>
+                <h5>Regístrate</h5>
 
-</div>
+                <p>
+                    Crea una cuenta en EcoCycle.
+                </p>
 
-</div>
+            </div>
 
-<div class="col-md-3">
+            <div class="col-md-3">
 
-<div class="card shadow text-center p-4">
+                <h1>2️⃣</h1>
 
-📰
+                <h5>Entrega residuos</h5>
 
-<h5>Papel</h5>
+                <p>
+                    Lleva tus materiales al centro de reciclaje.
+                </p>
 
-</div>
+            </div>
 
-</div>
+            <div class="col-md-3">
 
-<div class="col-md-3">
+                <h1>3️⃣</h1>
 
-<div class="card shadow text-center p-4">
+                <h5>Obtén puntos</h5>
 
-🍾
+                <p>
+                    Acumula puntos por cada kilogramo reciclado.
+                </p>
 
-<h5>Vidrio</h5>
+            </div>
 
-</div>
+            <div class="col-md-3">
 
-</div>
+                <h1>4️⃣</h1>
 
-<div class="col-md-3">
+                <h5>Canjea recompensas</h5>
 
-<div class="card shadow text-center p-4">
+                <p>
+                    Intercambia tus puntos por premios.
+                </p>
 
-🥫
+            </div>
 
-<h5>Metal</h5>
+        </div>
 
-</div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
+
+<!-- ===========================
+        LLAMADO A LA ACCIÓN
+============================ -->
 
 <section class="bg-success text-white text-center py-5">
 
-<div class="container">
+    <div class="container">
 
-<h2>
+        <h2 class="mb-3">
 
-Juntos podemos hacer la diferencia.
+            Juntos podemos hacer la diferencia.
 
-</h2>
+        </h2>
 
-<p>
+        <p class="lead">
 
-Miles de kilos reciclados gracias a nuestra comunidad.
+            Miles de kilos reciclados gracias a nuestra comunidad.
 
-</p>
+        </p>
 
-<a class="btn btn-light btn-lg">
+        <a asp-controller="Usuarios"
+           asp-action="Registro"
+           class="btn btn-light btn-lg mt-3">
 
-Únete Ahora
+            Únete Ahora
 
-</a>
+        </a>
 
-</div>
+    </div>
 
 </section>

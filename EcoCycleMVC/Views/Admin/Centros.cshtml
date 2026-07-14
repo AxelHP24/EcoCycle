@@ -1,0 +1,42 @@
+@model IEnumerable<EcoCycleMVC.Models.CentrosRecoleccion>
+
+@{
+    ViewData["Title"] = "Centros de Recolección";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+        📍 Centros de Reciclaje
+    </h2>
+
+    <table class="table table-bordered table-hover shadow">
+
+        <thead class="table-secondary">
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Capacidad</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NombreCentro</td>
+                <td>@item.Direccion</td>
+                <td>@item.CapacidadActual / @item.CapacidadMaxima kg</td>
+                <td>@item.Correo</td>
+                <td>@item.Telefono</td>
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+</div>

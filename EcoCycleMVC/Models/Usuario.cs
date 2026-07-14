@@ -25,7 +25,7 @@ public partial class Usuario
 
     public DateTime? FechaRegistro { get; set; }
 
-    public bool? Activo { get; set; }
+    public bool Activo { get; set; }
 
     public virtual ICollection<Canje> Canjes { get; set; } = new List<Canje>();
 

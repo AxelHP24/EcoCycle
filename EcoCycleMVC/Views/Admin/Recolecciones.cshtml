@@ -1,0 +1,44 @@
+@model IEnumerable<EcoCycleMVC.Models.RecogidasDomicilio>
+
+@{
+    ViewData["Title"] = "Recolecciones";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+        🚚 Recolecciones a Domicilio
+    </h2>
+
+    <table class="table table-striped table-hover shadow">
+
+        <thead class="table-info">
+            <tr>
+                <th>Ciudadano</th>
+                <th>Centro</th>
+                <th>Dirección</th>
+                <th>Fecha Solicitud</th>
+                <th>Fecha Programada</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Usuario.Nombre</td>
+                <td>@item.Centro.NombreCentro</td>
+                <td>@item.Direccion</td>
+                <td>@item.FechaSolicitud?.ToString("dd/MM/yyyy")</td>
+                <td>@item.FechaProgramada?.ToString("dd/MM/yyyy")</td>
+                <td>@item.Estado</td>
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+</div>

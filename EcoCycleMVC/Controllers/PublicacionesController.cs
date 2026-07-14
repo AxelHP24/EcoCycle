@@ -14,14 +14,14 @@ namespace EcoCycleMVC.Controllers
             _context = context;
         }
 
-        //=====================================
+        //====================================================
         // CREAR PUBLICACIÓN (GET)
-        //=====================================
+        //====================================================
 
         [HttpGet]
         public IActionResult Crear()
         {
-            var modelo = new NuevaPublicacionViewModel();
+            NuevaPublicacionViewModel modelo = new();
 
             modelo.Materiales = _context.Materiales
                 .Select(m => new SelectListItem
@@ -34,9 +34,9 @@ namespace EcoCycleMVC.Controllers
             return View(modelo);
         }
 
-        //=====================================
+        //====================================================
         // CREAR PUBLICACIÓN (POST)
-        //=====================================
+        //====================================================
 
         [HttpPost]
         public IActionResult Crear(NuevaPublicacionViewModel modelo)
@@ -52,19 +52,24 @@ namespace EcoCycleMVC.Controllers
             if (!ModelState.IsValid)
                 return View(modelo);
 
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
 
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
 
-            // Buscar el material seleccionado
             var material = _context.Materiales
                 .FirstOrDefault(m => m.MaterialId == modelo.MaterialId);
 
             if (material == null)
+            {
+                ModelState.AddModelError("", "Material no encontrado.");
                 return View(modelo);
+            }
 
-            // Crear publicación
+            //-------------------------------------------------
+            // CREAR PUBLICACIÓN
+            //-------------------------------------------------
+
             Publicacione nueva = new Publicacione
             {
                 UsuarioId = usuarioId.Value,
@@ -78,13 +83,35 @@ namespace EcoCycleMVC.Controllers
 
             _context.Publicaciones.Add(nueva);
 
-            //=========================================
+            //-------------------------------------------------
+            // CREAR CENTRO SI NO EXISTE
+            //-------------------------------------------------
+
+            bool existeCentro = _context.CentrosRecoleccions
+                .Any(c => c.Direccion == modelo.Ubicacion);
+
+            if (!existeCentro)
+            {
+                CentrosRecoleccion centro = new CentrosRecoleccion
+                {
+                    NombreCentro = "Centro " + modelo.Ubicacion,
+                    Direccion = modelo.Ubicacion,
+                    CapacidadActual = 0,
+                    CapacidadMaxima = 1000,
+                    Correo = "",
+                    Telefono = ""
+                };
+
+                _context.CentrosRecoleccions.Add(centro);
+            }
+
+            //-------------------------------------------------
             // CALCULAR PUNTOS
-            //=========================================
+            //-------------------------------------------------
 
             int puntosGanados = (int)(modelo.CantidadKg * material.PuntosPorKg);
 
-            var usuario = _context.Usuarios
+            Usuario? usuario = _context.Usuarios
                 .FirstOrDefault(u => u.UsuarioId == usuarioId.Value);
 
             if (usuario != null)
@@ -92,9 +119,9 @@ namespace EcoCycleMVC.Controllers
                 usuario.Puntos = (usuario.Puntos ?? 0) + puntosGanados;
             }
 
-            //=========================================
+            //-------------------------------------------------
             // REGISTRAR MOVIMIENTO
-            //=========================================
+            //-------------------------------------------------
 
             MovimientosPunto movimiento = new MovimientosPunto
             {
@@ -109,19 +136,18 @@ namespace EcoCycleMVC.Controllers
 
             _context.SaveChanges();
 
-            TempData["Mensaje"] =
-                $"¡Publicación realizada! Has ganado {puntosGanados} puntos.";
+            TempData["Mensaje"] = $"¡Publicación realizada! Has ganado {puntosGanados} puntos.";
 
             return RedirectToAction(nameof(MisPublicaciones));
         }
 
-        //=====================================
+        //====================================================
         // MIS PUBLICACIONES
-        //=====================================
+        //====================================================
 
         public IActionResult MisPublicaciones()
         {
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
 
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
@@ -135,26 +161,26 @@ namespace EcoCycleMVC.Controllers
             return View(publicaciones);
         }
 
-        //=====================================
+        //====================================================
         // EDITAR (GET)
-        //=====================================
+        //====================================================
 
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
 
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
 
             var publicacion = _context.Publicaciones
-                .FirstOrDefault(x => x.PublicacionId == id &&
-                                     x.UsuarioId == usuarioId.Value);
+                .FirstOrDefault(p => p.PublicacionId == id &&
+                                     p.UsuarioId == usuarioId.Value);
 
             if (publicacion == null)
                 return NotFound();
 
-            var modelo = new NuevaPublicacionViewModel
+            NuevaPublicacionViewModel modelo = new()
             {
                 MaterialId = publicacion.MaterialId,
                 CantidadKg = publicacion.CantidadKg ?? 0,
@@ -175,9 +201,9 @@ namespace EcoCycleMVC.Controllers
             return View(modelo);
         }
 
-        //=====================================
+        //====================================================
         // EDITAR (POST)
-        //=====================================
+        //====================================================
 
         [HttpPost]
         public IActionResult Editar(int id, NuevaPublicacionViewModel modelo)
@@ -196,14 +222,14 @@ namespace EcoCycleMVC.Controllers
                 return View(modelo);
             }
 
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
 
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
 
             var publicacion = _context.Publicaciones
-                .FirstOrDefault(x => x.PublicacionId == id &&
-                                     x.UsuarioId == usuarioId.Value);
+                .FirstOrDefault(p => p.PublicacionId == id &&
+                                     p.UsuarioId == usuarioId.Value);
 
             if (publicacion == null)
                 return NotFound();
@@ -220,21 +246,21 @@ namespace EcoCycleMVC.Controllers
             return RedirectToAction(nameof(MisPublicaciones));
         }
 
-        //=====================================
+        //====================================================
         // ELIMINAR
-        //=====================================
+        //====================================================
 
         [HttpGet]
         public IActionResult Eliminar(int id)
         {
-            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+            int? usuarioId = HttpContext.Session.GetInt32("UsuarioId");
 
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
 
             var publicacion = _context.Publicaciones
-                .FirstOrDefault(x => x.PublicacionId == id &&
-                                     x.UsuarioId == usuarioId.Value);
+                .FirstOrDefault(p => p.PublicacionId == id &&
+                                     p.UsuarioId == usuarioId.Value);
 
             if (publicacion == null)
                 return NotFound();

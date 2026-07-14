@@ -1,0 +1,206 @@
+@model EcoCycleMVC.Models.Usuario
+
+@{
+    ViewData["Title"] = "Panel de Administrador";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="text-success">
+            Panel de Administración
+        </h1>
+
+        <h4>Bienvenido, @Model.Nombre</h4>
+
+        <p class="text-muted">
+            Administra toda la plataforma EcoCycle desde este panel.
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h2>👥</h2>
+
+                    <h4>Usuarios</h4>
+
+                    <p>
+                        Administrar ciudadanos registrados.
+                    </p>
+
+                    <!-- Usuarios -->
+<a asp-controller="Admin"
+   asp-action="Usuarios"
+   class="btn btn-success">
+    Administrar
+</a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h2>♻</h2>
+
+                    <h4>Materiales</h4>
+
+                    <p>
+                        Agregar y editar materiales reciclables.
+                    </p>
+
+                    <!-- Materiales -->
+<a asp-controller="Admin"
+   asp-action="Materiales"
+   class="btn btn-primary">
+    Ver
+</a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h2>📦</h2>
+
+                    <h4>Publicaciones</h4>
+
+                    <p>
+                        Revisar publicaciones de los ciudadanos.
+                    </p>
+
+                  <!-- Publicaciones -->
+<a asp-controller="Admin"
+   asp-action="Publicaciones"
+   class="btn btn-warning">
+    Revisar
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h2>🚚</h2>
+
+                    <h4>Recolecciones</h4>
+
+                    <p>
+                        Gestionar solicitudes de recolección.
+                    </p>
+
+                   
+<!-- Recolecciones -->
+<a asp-controller="Admin"
+   asp-action="Recolecciones"
+   class="btn btn-info text-white">
+    Gestionar
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h2>📍</h2>
+
+                    <h4>Centros</h4>
+
+                    <p>
+                        Administrar centros de reciclaje.
+                    </p>
+<!-- Centros -->
+<a asp-controller="Admin"
+   asp-action="Centros"
+   class="btn btn-secondary">
+    Ver
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h2>🎁</h2>
+
+                    <h4>Canjes</h4>
+
+                    <p>
+                        Administrar recompensas y canjes.
+                    </p>
+
+                   <!-- Canjes -->
+<a asp-controller="Admin"
+   asp-action="Canjes"
+   class="btn btn-danger">
+    Abrir
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+
+        <a asp-action="Logout"
+           class="btn btn-outline-danger">
+
+            Cerrar sesión
+
+        </a>
+
+    </div>
+
+</div>

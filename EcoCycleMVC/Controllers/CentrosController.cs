@@ -13,9 +13,10 @@ namespace EcoCycleMVC.Controllers
             _context = context;
         }
 
-        // =========================
-        // LISTA DE CENTROS (DINÁMICO)
-        // =========================
+        //=========================
+        // CENTROS (UBICACIONES DE PUBLICACIONES)
+        //=========================
+
         public IActionResult Index()
         {
             var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
@@ -24,12 +25,8 @@ namespace EcoCycleMVC.Controllers
                 return RedirectToAction("Login", "Usuarios");
 
             var ubicaciones = _context.Publicaciones
-                .Where(p => p.Ubicacion != null && p.Ubicacion != "")
-                .Select(p => new
-                {
-                    p.Ubicacion
-                })
-                .Distinct()
+                .Where(p => !string.IsNullOrEmpty(p.Ubicacion))
+                .OrderBy(p => p.Ubicacion)
                 .ToList();
 
             return View(ubicaciones);

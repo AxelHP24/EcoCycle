@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EcoCycleMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9283640ea76bc5cc0dd225d081ce880a4f28fea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7984c4b10ffe704b284b9b04d65d9dae5084cb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("EcoCycleMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EcoCycleMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

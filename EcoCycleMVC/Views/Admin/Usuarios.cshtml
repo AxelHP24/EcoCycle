@@ -1,0 +1,50 @@
+@model IEnumerable<EcoCycleMVC.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Administrar Usuarios";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+        👥 Administrar Usuarios
+    </h2>
+
+    <table class="table table-striped table-hover shadow">
+
+        <thead class="table-success">
+
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Tipo</th>
+                <th>Puntos</th>
+                <th>Estado</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        @foreach(var item in Model)
+        {
+            <tr>
+
+                <td>@item.Nombre</td>
+                <td>@item.Correo</td>
+                <td>@item.TipoUsuario</td>
+                <td>@item.Puntos</td>
+                <td>
+
+                    @(item.Activo ? "Activo" : "Inactivo")
+
+                </td>
+
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+</div>

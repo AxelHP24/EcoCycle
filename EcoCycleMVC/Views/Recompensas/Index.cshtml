@@ -1,0 +1,135 @@
+@model List<EcoCycleMVC.Models.Recompensa>
+
+@{
+    ViewData["Title"] = "Recompensas";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="display-5 fw-bold text-success">
+
+            🏆 Recompensas EcoCycle
+
+        </h1>
+
+        <p class="lead">
+
+            Canjea tus puntos por increíbles premios ecológicos.
+
+        </p>
+
+        <div class="alert alert-success shadow">
+
+            <h3>
+
+                ⭐ Tus puntos disponibles:
+                <strong>@ViewBag.Puntos</strong>
+
+            </h3>
+
+        </div>
+
+    </div>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success text-center">
+
+            @TempData["Mensaje"]
+
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger text-center">
+
+            @TempData["Error"]
+
+        </div>
+    }
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="card shadow-lg border-0 rounded-4 h-100">
+
+                    <div class="card-body text-center">
+
+                        <div style="font-size:70px">
+
+                            🎁
+
+                        </div>
+
+                        <h4 class="fw-bold">
+
+                            @item.Nombre
+
+                        </h4>
+
+                        <p class="text-muted">
+
+                            @item.Descripcion
+
+                        </p>
+
+                        <hr />
+
+                        <h3 class="text-success">
+
+                            ⭐ @item.PuntosNecesarios pts
+
+                        </h3>
+
+                        <p>
+
+                            Existencias:
+                            <strong>@item.Stock</strong>
+
+                        </p>
+
+                        @if ((int)ViewBag.Puntos >= item.PuntosNecesarios && item.Stock > 0)
+                        {
+                            <a asp-action="Canjear"
+                               asp-route-id="@item.RecompensaId"
+                               class="btn btn-success w-100">
+
+                                Canjear
+
+                            </a>
+                        }
+                        else if(item.Stock <= 0)
+                        {
+                            <button class="btn btn-dark w-100" disabled>
+
+                                Sin existencias
+
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary w-100" disabled>
+
+                                Puntos insuficientes
+
+                            </button>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

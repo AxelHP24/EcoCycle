@@ -1,7 +1,7 @@
 using EcoCycleMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcoCycleMVC.Controllers
 {
@@ -14,7 +14,11 @@ namespace EcoCycleMVC.Controllers
             _context = context;
         }
 
-        // GET: Crear recogida
+        //=====================================================
+        // CREAR (GET)
+        //=====================================================
+
+        [HttpGet]
         public IActionResult Crear()
         {
             var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
@@ -22,29 +26,34 @@ namespace EcoCycleMVC.Controllers
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
 
-            var modelo = new RecogidaViewModel
-            {
-                Centros = _context.CentrosRecoleccions
-                    .Select(c => new SelectListItem
-                    {
-                        Value = c.CentroId.ToString(),
-                        Text = c.Direccion // ✅ CORREGIDO
-                    })
-                    .ToList()
-            };
+            NuevaRecogidaViewModel modelo = new NuevaRecogidaViewModel();
+
+            modelo.Centros = _context.CentrosRecoleccions
+                .OrderBy(c => c.Direccion)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.CentroId.ToString(),
+                    Text = c.Direccion
+                })
+                .ToList();
 
             return View(modelo);
         }
 
-        // POST: Crear recogida
+        //=====================================================
+        // CREAR (POST)
+        //=====================================================
+
         [HttpPost]
-        public IActionResult Crear(RecogidaViewModel modelo)
+        [ValidateAntiForgeryToken]
+        public IActionResult Crear(NuevaRecogidaViewModel modelo)
         {
             modelo.Centros = _context.CentrosRecoleccions
+                .OrderBy(c => c.Direccion)
                 .Select(c => new SelectListItem
                 {
                     Value = c.CentroId.ToString(),
-                    Text = c.Direccion // ✅ CORREGIDO
+                    Text = c.Direccion
                 })
                 .ToList();
 
@@ -56,21 +65,49 @@ namespace EcoCycleMVC.Controllers
             if (usuarioId == null)
                 return RedirectToAction("Login", "Usuarios");
 
-            var recogida = new RecogidasDomicilio
+            if (modelo.FechaProgramada == null)
+            {
+                ModelState.AddModelError("FechaProgramada", "Seleccione una fecha de recogida.");
+                return View(modelo);
+            }
+
+            RecogidasDomicilio nueva = new RecogidasDomicilio
             {
                 UsuarioId = usuarioId.Value,
                 CentroId = modelo.CentroId,
-                Direccion = modelo.Direccion,
                 FechaSolicitud = DateTime.Now,
+                FechaProgramada = modelo.FechaProgramada.Value,
+                Direccion = modelo.Direccion,
                 Estado = "Pendiente"
             };
 
-            _context.RecogidasDomicilios.Add(recogida);
+            _context.RecogidasDomicilios.Add(nueva);
+
             _context.SaveChanges();
 
-            TempData["Mensaje"] = "Recogida solicitada correctamente";
+            TempData["Mensaje"] = "Recogida solicitada correctamente.";
 
-            return RedirectToAction("Dashboard", "Usuarios");
+            return RedirectToAction(nameof(MisRecogidas));
+        }
+
+        //=====================================================
+        // MIS RECOGIDAS
+        //=====================================================
+
+        public IActionResult MisRecogidas()
+        {
+            var usuarioId = HttpContext.Session.GetInt32("UsuarioId");
+
+            if (usuarioId == null)
+                return RedirectToAction("Login", "Usuarios");
+
+            var lista = _context.RecogidasDomicilios
+                .Include(r => r.Centro)
+                .Where(r => r.UsuarioId == usuarioId.Value)
+                .OrderByDescending(r => r.FechaSolicitud)
+                .ToList();
+
+            return View(lista);
         }
     }
 }

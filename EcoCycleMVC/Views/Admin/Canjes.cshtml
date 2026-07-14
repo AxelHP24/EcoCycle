@@ -1,0 +1,50 @@
+@model IEnumerable<EcoCycleMVC.Models.Canje>
+
+@{
+    ViewData["Title"] = "Canjes";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-success mb-4">
+        🎁 Historial de Canjes
+    </h2>
+
+    <table class="table table-hover shadow">
+
+        <thead class="table-danger">
+
+            <tr>
+                <th>Usuario</th>
+                <th>Recompensa</th>
+                <th>Código</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@item.Usuario.Nombre</td>
+
+                <td>@item.Recompensa.Nombre</td>
+
+                <td>@item.CodigoCupon</td>
+
+                <td>@item.Estado</td>
+
+                <td>@item.FechaCanje?.ToString("dd/MM/yyyy")</td>
+
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+</div>
